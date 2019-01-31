@@ -7,7 +7,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import JssProvider from "react-jss/lib/JssProvider";
 import getPageContext, { PageContext } from "../src/getPageContext";
-import Wrapper from "../components/wrapper";
+import Wrapper from "../components/Wrapper";
 
 interface Props extends NextAppContext {
   pageProps: PageProps;
