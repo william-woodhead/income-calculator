@@ -1,6 +1,7 @@
 // This page is based on the Material-ui Next.js page
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 import { SheetsRegistry, GenerateClassName } from "jss";
+import purple from "@material-ui/core/colors/purple";
 import {
   createMuiTheme,
   createGenerateClassName,
@@ -16,11 +17,7 @@ export interface PageContext {
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      light: "#66e1c2",
-      main: "#15d0a0",
-      dark: "#008b68"
-    }
+    primary: purple
   }
 });
 
