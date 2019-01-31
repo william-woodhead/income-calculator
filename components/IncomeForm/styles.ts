@@ -2,8 +2,9 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 export default ({ spacing, palette }: Theme) =>
   createStyles({
     root: {
-      maxWidth: 400,
-      flexGrow: 1
+      maxWidth: "100%",
+      flexGrow: 1,
+      minHeight: "100vh"
     },
     header: {
       display: "flex",
@@ -11,13 +12,6 @@ export default ({ spacing, palette }: Theme) =>
       height: 50,
       paddingLeft: spacing.unit * 4,
       backgroundColor: palette.background.default
-    },
-    img: {
-      height: 255,
-      display: "block",
-      maxWidth: 400,
-      overflow: "hidden",
-      width: "100%"
     },
     mobileStepper: {}
   });
