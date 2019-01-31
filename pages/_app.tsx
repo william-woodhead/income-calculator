@@ -7,16 +7,13 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import JssProvider from "react-jss/lib/JssProvider";
 import getPageContext, { PageContext } from "../src/getPageContext";
-import Wrapper, { ContentType } from "../components/wrapper";
+import Wrapper from "../components/wrapper";
 
 interface Props extends NextAppContext {
   pageProps: PageProps;
-  content: ContentType;
 }
 
-interface PageProps {
-  content: ContentType;
-}
+interface PageProps {}
 
 class MyApp extends App<Props> {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
@@ -58,7 +55,7 @@ class MyApp extends App<Props> {
             sheetsManager={this.pageContext.sheetsManager}
           >
             <CssBaseline />
-            <Wrapper content={pageProps.content}>
+            <Wrapper>
               <Component {...pageProps} pageContext={this.pageContext} />
             </Wrapper>
           </MuiThemeProvider>

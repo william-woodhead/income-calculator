@@ -27,16 +27,9 @@ class ErrorPage extends React.Component<Props> {
     const statusCode = res
       ? res.statusCode
       : err
-        ? (err as any).statusCode
-        : null;
-    return {
-      statusCode,
-      content: {
-        topbar: {
-          buttonText: "Open sidebar"
-        }
-      }
-    };
+      ? (err as any).statusCode
+      : null;
+    return { statusCode };
   }
 
   render() {
