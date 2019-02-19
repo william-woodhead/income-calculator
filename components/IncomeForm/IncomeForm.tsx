@@ -15,16 +15,19 @@ type StepType = "income-input" | "result";
 type Step = {
   type: StepType;
   title: string;
+  subtitle: string;
 };
 
 const steps: Array<Step> = [
   {
     type: "income-input",
-    title: "Enter your yearly income"
+    title: "Tax Calculator",
+    subtitle: "Enter your income"
   },
   {
     type: "result",
-    title: "Estimated take home"
+    title: "Results",
+    subtitle: "Estimated tax calculations"
   }
 ];
 
@@ -83,12 +86,18 @@ class IncomeForm extends Component<Props, State> {
     return (
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
-          <Typography>{steps[activeStep].title}</Typography>
+          <Typography component="h2" variant="h2" gutterBottom>
+            {steps[activeStep].title}
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            {steps[activeStep].subtitle}
+          </Typography>
         </Paper>
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={activeStep}
           onChangeIndex={this.handleStepChange}
+          className={classes.swipeable}
           enableMouseEvents
         >
           {steps.map((step, index) => (

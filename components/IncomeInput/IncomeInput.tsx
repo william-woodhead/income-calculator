@@ -38,7 +38,7 @@ class IncomeInput extends Component<Props, State> {
           id="outlined-full-width"
           label="Yearly income"
           placeholder="eg. 25,000"
-          helperText="Full width!"
+          helperText=""
           InputProps={{
             startAdornment: <InputAdornment position="start">£</InputAdornment>
           }}
@@ -51,13 +51,15 @@ class IncomeInput extends Component<Props, State> {
             shrink: true
           }}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.handleClick.bind(this)}
-        >
-          Submit
-        </Button>
+        <div className={classes.buttons}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleClick.bind(this)}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
     );
   }

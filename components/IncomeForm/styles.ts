@@ -3,16 +3,16 @@ export default ({ spacing, palette }: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      maxWidth: 400,
+      maxWidth: 500,
       flexGrow: 1,
       minHeight: "100vh"
     },
     header: {
-      display: "flex",
-      alignItems: "center",
-      height: 50,
-      paddingLeft: spacing.unit * 4,
+      marginTop: spacing.unit * 4,
       backgroundColor: palette.background.default
     },
-    mobileStepper: {}
+    mobileStepper: {},
+    swipeable: {
+      marginBottom: spacing.unit * 4
+    }
   });
