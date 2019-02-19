@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { WithStyles, withStyles, WithTheme } from "@material-ui/core/styles";
 import calculate from "../../engine/calculate";
+import { Period } from "../IncomeForm";
 import styles from "./styles";
 
 interface Props extends WithStyles<typeof styles>, WithTheme {
   figure: number;
+  period: Period;
 }
 
 class Result extends Component<Props> {

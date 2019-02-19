@@ -12,6 +12,7 @@ import Result from "../Result";
 import styles from "./styles";
 
 type StepType = "income-input" | "result";
+export type Period = "year" | "month" | "week" | "day" | "hour";
 type Step = {
   type: StepType;
   title: string;
@@ -36,12 +37,14 @@ interface Props extends WithStyles<typeof styles>, WithTheme {}
 interface State {
   activeStep: number;
   figure: number;
+  period: Period;
 }
 
 class IncomeForm extends Component<Props, State> {
   state: State = {
     activeStep: 0,
-    figure: 0
+    figure: 0,
+    period: "year"
   };
 
   handleNext = () => {
@@ -60,9 +63,10 @@ class IncomeForm extends Component<Props, State> {
     this.setState({ activeStep });
   };
 
-  handleInputSubmit({ figure }: { figure: number }) {
+  handleInputSubmit({ figure, period }: { figure: number; period: Period }) {
     this.setState({
-      figure
+      figure,
+      period
     });
     this.handleNext();
   }
@@ -72,7 +76,7 @@ class IncomeForm extends Component<Props, State> {
       case "income-input":
         return <IncomeInput onSubmit={this.handleInputSubmit.bind(this)} />;
       case "result":
-        return <Result figure={this.state.figure} />;
+        return <Result figure={this.state.figure} period={this.state.period} />;
       default:
         return null;
     }

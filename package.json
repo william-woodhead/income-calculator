@@ -33,7 +33,7 @@
     "next": "^7.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.2",
     "react-jss": "^8.6.1",
     "react-swipeable-views": "^0.13.1",
     "styled-jsx": "^3.2.0"
