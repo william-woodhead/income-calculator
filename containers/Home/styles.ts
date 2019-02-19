@@ -1,7 +1,11 @@
 import { createStyles, Theme } from "@material-ui/core/styles";
-export default ({ palette }: Theme) =>
+export default ({  }: Theme) =>
   createStyles({
-    root: {
-      background: palette.primary.main
+    root: {},
+    form: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
     }
   });

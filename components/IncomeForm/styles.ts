@@ -2,7 +2,8 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 export default ({ spacing, palette }: Theme) =>
   createStyles({
     root: {
-      maxWidth: "100%",
+      width: "100%",
+      maxWidth: 400,
       flexGrow: 1,
       minHeight: "100vh"
     },

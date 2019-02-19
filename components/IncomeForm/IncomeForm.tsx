@@ -8,9 +8,10 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import IncomeInput from "../IncomeInput";
+import Result from "../Result";
 import styles from "./styles";
 
-type StepType = "income-input";
+type StepType = "income-input" | "result";
 type Step = {
   type: StepType;
   title: string;
@@ -20,6 +21,10 @@ const steps: Array<Step> = [
   {
     type: "income-input",
     title: "Enter your yearly income"
+  },
+  {
+    type: "result",
+    title: "Estimated take home"
   }
 ];
 
@@ -27,11 +32,13 @@ interface Props extends WithStyles<typeof styles>, WithTheme {}
 
 interface State {
   activeStep: number;
+  figure: number;
 }
 
 class IncomeForm extends Component<Props, State> {
   state: State = {
-    activeStep: 0
+    activeStep: 0,
+    figure: 0
   };
 
   handleNext = () => {
@@ -50,10 +57,19 @@ class IncomeForm extends Component<Props, State> {
     this.setState({ activeStep });
   };
 
+  handleInputSubmit({ figure }: { figure: number }) {
+    this.setState({
+      figure
+    });
+    this.handleNext();
+  }
+
   renderStep(step: Step) {
     switch (step.type) {
       case "income-input":
-        return <IncomeInput />;
+        return <IncomeInput onSubmit={this.handleInputSubmit.bind(this)} />;
+      case "result":
+        return <Result figure={this.state.figure} />;
       default:
         return null;
     }

@@ -4,5 +4,9 @@
   "plugins": ["typescript", "prettier"],
   "rules": {
     "prettier/prettier": "error"
+  },
+  "env": {
+    "jest": true,
+    "es6": true
   }
 }
