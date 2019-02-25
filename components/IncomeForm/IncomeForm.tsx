@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import IncomeInput from "../IncomeInput";
+import IncomeInput, { Submission } from "../IncomeInput";
 import Result from "../Result";
 import styles from "./styles";
 
@@ -38,13 +38,15 @@ interface State {
   activeStep: number;
   figure: number;
   period: Period;
+  startYear: string;
 }
 
 class IncomeForm extends Component<Props, State> {
   state: State = {
     activeStep: 0,
     figure: 0,
-    period: "year"
+    period: "year",
+    startYear: "2018"
   };
 
   handleNext = () => {
@@ -63,10 +65,11 @@ class IncomeForm extends Component<Props, State> {
     this.setState({ activeStep });
   };
 
-  handleInputSubmit({ figure, period }: { figure: number; period: Period }) {
+  handleInputSubmit({ figure, period, startYear }: Submission) {
     this.setState({
       figure,
-      period
+      period,
+      startYear
     });
     this.handleNext();
   }
@@ -76,7 +79,13 @@ class IncomeForm extends Component<Props, State> {
       case "income-input":
         return <IncomeInput onSubmit={this.handleInputSubmit.bind(this)} />;
       case "result":
-        return <Result figure={this.state.figure} period={this.state.period} />;
+        return (
+          <Result
+            figure={this.state.figure}
+            period={this.state.period}
+            startYear={this.state.startYear}
+          />
+        );
       default:
         return null;
     }

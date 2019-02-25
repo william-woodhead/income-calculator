@@ -15,32 +15,54 @@ import styles from "./styles";
 interface State {
   value: string;
   period: Period;
-  labelWidth: number;
+  startYear: string;
+  periodLabelWidth: number;
+  yearLabelWidth: number;
+}
+
+export interface Submission {
+  figure: number;
+  period: Period;
+  startYear: string;
 }
 
 interface Props extends WithStyles<typeof styles>, WithTheme {
-  onSubmit: (arg0: { figure: number; period: string }) => void;
+  onSubmit: (arg0: Submission) => void;
 }
 
 class IncomeInput extends Component<Props, State> {
   state = {
     value: "",
-    period: "year",
-    labelWidth: 0
+    period: "year" as Period,
+    startYear: "2018",
+    periodLabelWidth: 0,
+    yearLabelWidth: 0
   };
 
-  InputLabelRef = null;
+  periodInputLabelRef = null;
+  yearInputLabelRef = null;
 
   componentDidMount() {
-    if (!this.InputLabelRef) return;
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    });
+    if (this.periodInputLabelRef) {
+      this.setState({
+        periodLabelWidth: ReactDOM.findDOMNode(this.periodInputLabelRef)
+          .offsetWidth
+      });
+    }
+    if (this.yearInputLabelRef) {
+      this.setState({
+        yearLabelWidth: ReactDOM.findDOMNode(this.yearInputLabelRef).offsetWidth
+      });
+    }
   }
 
   handleClick() {
     const parsed = parseInt(this.state.value, 10);
-    this.props.onSubmit({ figure: parsed, period: this.state.period });
+    this.props.onSubmit({
+      figure: parsed,
+      period: this.state.period,
+      startYear: this.state.startYear
+    });
   }
 
   handleChange(event: any) {
@@ -52,7 +74,12 @@ class IncomeInput extends Component<Props, State> {
 
   handlePeriodChange(event: any) {
     const target = event.target as HTMLTextAreaElement;
-    this.setState({ period: target.value });
+    this.setState({ period: target.value as Period });
+  }
+
+  handleStartYearChange(event: any) {
+    const target = event.target as HTMLTextAreaElement;
+    this.setState({ startYear: target.value });
   }
 
   render() {
@@ -82,9 +109,9 @@ class IncomeInput extends Component<Props, State> {
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel
               ref={(ref: any) => {
-                this.InputLabelRef = ref;
+                this.periodInputLabelRef = ref;
               }}
-              htmlFor="outlined-age-simple"
+              htmlFor="outlined-period"
             >
               Period
             </InputLabel>
@@ -93,9 +120,9 @@ class IncomeInput extends Component<Props, State> {
               onChange={this.handlePeriodChange.bind(this)}
               input={
                 <OutlinedInput
-                  labelWidth={this.state.labelWidth}
+                  labelWidth={this.state.periodLabelWidth}
                   name="Period"
-                  id="outlined-age-simple"
+                  id="outlined-period"
                 />
               }
             >
@@ -104,6 +131,29 @@ class IncomeInput extends Component<Props, State> {
               <MenuItem value={"week"}>Weekly</MenuItem>
               <MenuItem value={"day"}>Daily</MenuItem>
               <MenuItem value={"hour"}>Hourly</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel
+              ref={(ref: any) => {
+                this.yearInputLabelRef = ref;
+              }}
+              htmlFor="outlined-start-year"
+            >
+              Tax Year
+            </InputLabel>
+            <Select
+              value={this.state.startYear}
+              onChange={this.handleStartYearChange.bind(this)}
+              input={
+                <OutlinedInput
+                  labelWidth={this.state.yearLabelWidth}
+                  name="Tax year"
+                  id="outlined-start-year"
+                />
+              }
+            >
+              <MenuItem value={"2018"}>2018/19</MenuItem>
             </Select>
           </FormControl>
         </div>
